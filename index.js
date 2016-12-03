@@ -25,7 +25,8 @@ app.get('/webhook/', function (req, res) {
         res.send(req.query['hub.challenge']);
     }
 
-    res.send('Error, token invalido');
+    //res.send('Error, token invalido');
+	res.sendStatus(200);
 
 });
 
