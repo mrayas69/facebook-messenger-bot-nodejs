@@ -56,7 +56,7 @@ app.post('/webhook/', function (req, res) {
 					sMensaje="He recibido tu mensaje: "+ text.substring(0, 200);
 								
 			}
-			sendTextMessage(sender, "He recibido tu mensaje: "+ sMensaje.substring(0, 200));
+			sendTextMessage(sender,sMensaje.substring(0, 200));
         }
     }
 
