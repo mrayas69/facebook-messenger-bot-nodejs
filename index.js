@@ -25,7 +25,6 @@ app.get('/webhook/', function (req, res) {
 		if (req.query['hub.verify_token'] === verify_token) {
 			res.send(req.query['hub.challenge']);
 		}
-
 		res.send('Error, token invalido');
 	} catch (err) {
 	  res.send('Error:'+err);
@@ -45,8 +44,10 @@ app.post('/webhook/', function (req, res) {
 
         if (event.message && event.message.text) {
             var text = event.message.text;
-
-            sendTextMessage(sender, "Texto recibido: "+ text.substring(0, 200));
+			if (text==verify_token)
+				sendTextMessage(sender, "Bienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html");
+			else	
+				sendTextMessage(sender, "He recibido tu mensaje: "+ text.substring(0, 200));
         }
     }
 
