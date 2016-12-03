@@ -7,7 +7,7 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 
 //Your FanPageToken Generated in your FB App
-var token = "<EAAJ1IPDkOIEBAKJpSJscO2PhlZBASOR6byTnQA0TEEaXKQHHQnvrf14BMVCZARbgyQBWtemv8LsAjepeCHBVSPJ7B5oNlHtfZBc0QV0TU9wug4y28mXwnSDWZC2kEE51WZC3yZBa5T8f14E3SAhBIwklZAdgfueYVlk6zDmyVgpGgZDZD>";
+var token = "EAAJ1IPDkOIEBAKJpSJscO2PhlZBASOR6byTnQA0TEEaXKQHHQnvrf14BMVCZARbgyQBWtemv8LsAjepeCHBVSPJ7B5oNlHtfZBc0QV0TU9wug4y28mXwnSDWZC2kEE51WZC3yZBa5T8f14E3SAhBIwklZAdgfueYVlk6zDmyVgpGgZDZD";
 var verify_token = "Hola";
 
 //Root EndPoint
@@ -25,8 +25,8 @@ app.get('/webhook/', function (req, res) {
         res.send(req.query['hub.challenge']);
     }
 
-    //res.send('Error, token invalido');
-	res.sendStatus(200);
+    res.send('Error, token invalido');
+	//res.sendStatus(200);
 
 });
 
