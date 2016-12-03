@@ -46,7 +46,7 @@ app.post('/webhook/', function (req, res) {
             var text = event.message.text;
 			var sMensaje=text;
 			if (text==verify_token)
-				sMensaje="Bienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
+				sMensaje="SmartBot para Trip 1.0 \n Bienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
 			else{
 				var sDescargaApk="http://ryac.no-ip.com/smarttaxi/apps/TripPasajero.apk";
 				var n = text.indexOf("Android");
