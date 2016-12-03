@@ -44,10 +44,19 @@ app.post('/webhook/', function (req, res) {
 
         if (event.message && event.message.text) {
             var text = event.message.text;
+			var sMensaje=text;
 			if (text==verify_token)
-				sendTextMessage(sender, "Bienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html");
-			else	
-				sendTextMessage(sender, "He recibido tu mensaje: "+ text.substring(0, 200));
+				sMensaje="Bienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
+			else{
+				var sDescargaApk="http://ryac.no-ip.com/smarttaxi/apps/TripPasajero.apk";
+				var n = text.indexOf("Android");
+				if (n>=0)
+					sMensaje="Puedes descargar nuestra aplicacion para Android en "+sDescargaApk;
+				else
+					sMensaje="He recibido tu mensaje: "+ text.substring(0, 200);
+								
+			}
+			sendTextMessage(sender, "He recibido tu mensaje: "+ sMensaje.substring(0, 200));
         }
     }
 
