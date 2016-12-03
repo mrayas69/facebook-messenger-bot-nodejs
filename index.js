@@ -14,7 +14,7 @@ var verify_token = "Hola";
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('Facebook Messenger Bot root endpoint!');
+    res.send('botMensajero');
 
 });
 
