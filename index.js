@@ -11,6 +11,7 @@ var token = "<page_access_token>";
 var verify_token = "<validation_token>";
 
 //Root EndPoint
+//Modificado MR
 app.get('/', function (req, res) {
 
     res.send('Facebook Messenger Bot root endpoint!');
