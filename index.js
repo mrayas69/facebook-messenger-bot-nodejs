@@ -7,8 +7,8 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 
 //Your FanPageToken Generated in your FB App
-var token = "<page_access_token>";
-var verify_token = "<validation_token>";
+var token = "<EAAJ1IPDkOIEBAKJpSJscO2PhlZBASOR6byTnQA0TEEaXKQHHQnvrf14BMVCZARbgyQBWtemv8LsAjepeCHBVSPJ7B5oNlHtfZBc0QV0TU9wug4y28mXwnSDWZC2kEE51WZC3yZBa5T8f14E3SAhBIwklZAdgfueYVlk6zDmyVgpGgZDZD>";
+var verify_token = "Hola";
 
 //Root EndPoint
 //Modificado MR
