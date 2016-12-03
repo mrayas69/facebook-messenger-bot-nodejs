@@ -20,12 +20,16 @@ app.get('/', function (req, res) {
 
 //Setup Webhook
 app.get('/webhook/', function (req, res) {
+	try {
 
-    if (req.query['hub.verify_token'] === verify_token) {
-        res.send(req.query['hub.challenge']);
-    }
+		if (req.query['hub.verify_token'] === verify_token) {
+			res.send(req.query['hub.challenge']);
+		}
 
-    res.send('Error, token invalido');
+		res.send('Error, token invalido');
+	} catch (err) {
+	  res.send('Error:'+err);
+	}
 	//res.sendStatus(200);
 
 });
@@ -42,7 +46,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
 
-            sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
+            sendTextMessage(sender, "Texto recibido: "+ text.substring(0, 200));
         }
     }
 
