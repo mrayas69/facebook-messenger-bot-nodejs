@@ -84,7 +84,7 @@ function fRest(sender,Metodo,Parametro){
 			sRespuesta="Ocurrio error:"+error;
 		}
 		sendTextMessage(sender,sRespuesta.substring(0, 200));
-	})
+	});
 }
 
 //App listen
