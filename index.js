@@ -14,7 +14,7 @@ var verify_token = "Hola";
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero ver 1.0.161204');
+    res.send('botMensajero para Trip ver 1.0.161204');
 
 });
 
