@@ -46,46 +46,23 @@ app.post('/webhook/', function (req, res) {
             var text = event.message.text;
 			var sMensaje=text;
 			if (text==verify_token)
-				sMensaje="SmartBot para Trip 1.161204 \nBienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
-				sendTextMessage(sender,sMensaje.substring(0, 200));
+				sMensaje="SmartBot para Trip 1.0 \nBienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
 			else{
-				/*var sDescargaApk="http://ryac.no-ip.com/smarttaxi/apps/TripPasajero.apk";
+				var sDescargaApk="http://ryac.no-ip.com/smarttaxi/apps/TripPasajero.apk";
 				var n = text.indexOf("Android");
 				if (n>=0)
 					sMensaje="Puedes descargar nuestra aplicacion para Android en "+sDescargaApk;
 				else
-					sMensaje="He recibido tu mensaje: "+ text.substring(0, 200);*/
-				fRest(sender,'MensajeFaceBook',sMensaje);
+					sMensaje="He recibido tu mensaje: "+ text.substring(0, 200);
 								
 			}
-			
+			sendTextMessage(sender,sMensaje.substring(0, 200));
         }
     }
 
     res.sendStatus(200);
 
 });
-
-
-function fRest(sender,Metodo,Parametro){
-	
-	var request = require('request');
-	//var url ='http://ryac.no-ip.com/smarttaxi/rest_smarttaxi.svc'+Metodo+Parametro;
-	var url ='http://taxiver.com/rest_smarttaxi.svc/'+Metodo+'/'+Parametro;
-	request(url, function (error, response, body) {
-		var sRespuesta="";
-		if (!error && response.statusCode == 200) {
-			//console.log(body) // Print the google web page.
-			sRespuesta=body;
-			var oDatoJSON = JSON.parse(body);		
-			if (oDatoJSON!=null)
-				sRespuesta=oDatoJSON.MensajeFaceBookResult.respuesta;
-		}else{
-			sRespuesta="Ocurrio error:"+error;
-		}
-		sendTextMessage(sender,sRespuesta.substring(0, 200));
-	});
-}
 
 //App listen
 app.listen(port, function () {
