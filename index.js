@@ -80,7 +80,6 @@ function fRest(sender,Metodo,Parametro){
 			var oDatoJSON = JSON.parse(body);		
 			if (oDatoJSON!=null)
 				sRespuesta=oDatoJSON.MensajeFaceBookResult.respuesta;
-			res.send(sRespuesta);
 		}else{
 			sRespuesta="Ocurrio error:"+error;
 		}
