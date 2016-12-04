@@ -14,7 +14,7 @@ var verify_token = "Hola";
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero');
+    res.send('botMensajero ver 1.0.161204');
 
 });
 
@@ -67,11 +67,19 @@ app.post('/webhook/', function (req, res) {
 });
 
 
+
+//App listen
+app.listen(port, function () {
+
+    console.log('Facebook Messenger Bot on port: ' + port);
+
+});
+
 function fRest(sender,Metodo,Parametro){
 	
 	var rRequest = require('request');
 	//var url ='http://ryac.no-ip.com/smarttaxi/rest_smarttaxi.svc'+Metodo+Parametro;
-	var url ='http://taxiver.com/rest_smarttaxi.svc/'+Metodo+'/'+Parametro;
+	var url ='https://taxiver.com/rest_smarttaxi.svc/'+Metodo+'/'+Parametro;
 	rRequest(url, function (error, response, body) {
 		var sRespuesta="";
 		if (!error && response.statusCode == 200) {
@@ -85,14 +93,6 @@ function fRest(sender,Metodo,Parametro){
 		sendTextMessage(sender,sRespuesta.substring(0, 200));
 	});
 }
-
-//App listen
-app.listen(port, function () {
-
-    console.log('Facebook Messenger Bot on port: ' + port);
-
-});
-
 //send Message with Facebook Graph Facebook v2.6
 function sendTextMessage(sender, text) {
 
