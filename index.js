@@ -14,7 +14,7 @@ var verify_token = "Hola";
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161204');
+    res.send('botMensajero para Trip ver 1.0.161205');
 
 });
 
@@ -45,7 +45,11 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
 			var sMensaje=text;
-			fRest(sender,'MensajeFaceBook',sMensaje);
+			var n = text.indexOf("Menu");
+				if (n>=0)
+					sendMenuMessage(sender);
+				else
+					fRest(sender,'MensajeFaceBook',sMensaje);
 			/*if (text==verify_token){
 				sMensaje="SmartBot para Trip 1.161204 \nBienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
 				sendTextMessage(sender,sMensaje.substring(0, 200));
@@ -102,6 +106,49 @@ function sendTextMessage(sender, text) {
             recipient: {id: sender},
             message: messageData
         }
+    }, function (error, response) {
+
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+
+    });
+
+}
+
+function sendMenuMessage(sender, text) {
+
+    var messageData = {
+        text: text
+    };
+
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: token},
+        method: 'POST',
+        json:{
+        setting_type : "call_to_actions",
+        thread_state : "existing_thread",
+        call_to_actions:[
+            {
+              type:"postback",
+              title:"FAQ",
+              payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
+            },
+            {
+              type:"web_url",
+              title:"Politica de privacidad",
+              payload:"http://taxiver.com/privacidad.html"
+            },
+            {
+              type:"web_url",
+              title:"Sitio Web",
+              url:"http://ryac.no-ip.com/smarttaxi/index.html"
+            }
+          ]
+    }
     }, function (error, response) {
 
         if (error) {
