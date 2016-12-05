@@ -14,7 +14,7 @@ var verify_token = "Hola";
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161205a');
+    res.send('botMensajero para Trip ver 1.0.161205b');
 
 });
 
@@ -129,26 +129,26 @@ function sendMenuMessage(sender, text) {
         qs: {access_token: token},
         method: 'POST',
         json:{
-        setting_type : "call_to_actions",
-        thread_state : "existing_thread",
-        call_to_actions:[
-            {
-              type:"postback",
-              title:"FAQ",
-              payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_HELP"
-            },
-            {
-              type:"web_url",
-              title:"Politica de privacidad",
-              payload:"http://taxiver.com/privacidad.html"
-            },
-            {
-              type:"web_url",
-              title:"Sitio Web",
-              url:"http://ryac.no-ip.com/smarttaxi/index.html"
-            }
-          ]
-    }
+			setting_type : "call_to_actions",
+			thread_state : "existing_thread",
+			call_to_actions:[
+				{
+				  type:"web_url",
+				  title:"FAQ",
+				  payload:"http://ryac.no-ip.com/smarttaxi/index.html"
+				},
+				{
+				  type:"web_url",
+				  title:"Politica de privacidad",
+				  payload:"http://taxiver.com/privacidad.html"
+				},
+				{
+				  type:"web_url",
+				  title:"Sitio Web",
+				  url:"http://ryac.no-ip.com/smarttaxi/index.html"
+				}
+			  ]
+		}
     }, function (error, response) {
 
         if (error) {
