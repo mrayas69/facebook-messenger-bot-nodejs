@@ -45,19 +45,13 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
 			var sMensaje=text;
-			if (text==verify_token){
+			fRest(sender,'MensajeFaceBook',sMensaje);
+			/*if (text==verify_token){
 				sMensaje="SmartBot para Trip 1.161204 \nBienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
 				sendTextMessage(sender,sMensaje.substring(0, 200));
 			}else{
-				/*var sDescargaApk="http://ryac.no-ip.com/smarttaxi/apps/TripPasajero.apk";
-				var n = text.indexOf("Android");
-				if (n>=0)
-					sMensaje="Puedes descargar nuestra aplicacion para Android en "+sDescargaApk;
-				else
-					sMensaje="He recibido tu mensaje: "+ text.substring(0, 200);*/
-				fRest(sender,'MensajeFaceBook',sMensaje);
 								
-			}
+			}*/
 			
         }
     }
@@ -78,8 +72,8 @@ app.listen(port, function () {
 function fRest(sender,Metodo,Parametro){
 	
 	var rRequest = require('request');
-	//var url ='http://ryac.no-ip.com/smarttaxi/rest_smarttaxi.svc'+Metodo+Parametro;
-	var url ='http://taxiver.com/rest_smarttaxi.svc/'+Metodo+'/'+Parametro;
+	var url ='http://ryac.no-ip.com/smarttaxi/rest_smarttaxi.svc'+Metodo+Parametro;
+	//var url ='http://taxiver.com/rest_smarttaxi.svc/'+Metodo+'/'+Parametro;
 	rRequest(url, function (error, response, body) {
 		var sRespuesta="";
 		if (!error && response.statusCode == 200) {
