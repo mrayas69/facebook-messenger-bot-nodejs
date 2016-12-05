@@ -14,7 +14,7 @@ var verify_token = "Hola";
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161205b');
+    res.send('botMensajero para Trip ver 1.0.161205');
 
 });
 
@@ -45,17 +45,12 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
 			var sMensaje=text;
-			var n = text.indexOf("Menu");
+			/*var n = text.indexOf("Menu");
 				if (n>=0)
 					sendMenuMessage(sender);
-				else
+				else*/
 					fRest(sender,'MensajeFaceBook',sMensaje);
-			/*if (text==verify_token){
-				sMensaje="SmartBot para Trip 1.161204 \nBienvenido a Trip http://ryac.no-ip.com/smarttaxi/index.html";
-				sendTextMessage(sender,sMensaje.substring(0, 200));
-			}else{
-								
-			}*/
+
 			
         }
     }
