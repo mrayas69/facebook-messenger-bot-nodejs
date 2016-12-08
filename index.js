@@ -14,7 +14,7 @@ var verify_token = "Hola";
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161205');
+    res.send('botMensajero para Trip ver 1.0.161208');
 
 });
 
@@ -83,7 +83,7 @@ function fRest(sender,Metodo,Parametro){
 		}else{
 			sRespuesta="Ocurrio error:"+error;
 		}
-		sendTextMessage(sender,sRespuesta.substring(0, 200));
+		sendTextMessage(sender,sRespuesta.substring(0, 300));
 	});
 }
 //send Message with Facebook Graph Facebook v2.6
