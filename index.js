@@ -24,7 +24,7 @@ var cMensajeFaceBook = function () {
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161212b');
+    res.send('botMensajero para Trip ver 1.0.161212c');
 
 });
 
@@ -56,8 +56,7 @@ app.post('/webhook/', function (req, res) {
             var text = event.message.text;
 			var sMensaje=text;
 
-			fRest(sender,'MensajeFaceBook',sMensaje);
-			/*var oMensajeFaceBook = new cMensajeFaceBook();
+			var oMensajeFaceBook = new cMensajeFaceBook();
 			  oMensajeFaceBook.id_usuario = "Usuario facebook";
 			  oMensajeFaceBook.nombre_usuario = "Nombre";
 			  oMensajeFaceBook.correo_usuario = "Correo";
@@ -65,7 +64,10 @@ app.post('/webhook/', function (req, res) {
 			  oMensajeFaceBook.respuesta = "";
 			  oMensajeFaceBook.fecha_hora_mensaje = fFechaHora();
 			  oMensajeFaceBook.fecha_hora_respuesta = "";
-			wsProcesaMensajeFaceBook(res,oMensajeFaceBook);*/
+			  
+			//fRest(sender,'MensajeFaceBook',sMensaje);
+			
+			wsProcesaMensajeFaceBook(sender,oMensajeFaceBook);
 
 			
         }
@@ -84,7 +86,7 @@ app.listen(port, function () {
 
 });
 
-function wsProcesaMensajeFaceBook (res,oMensajeFaceBook){
+function wsProcesaMensajeFaceBook (sender,oMensajeFaceBook){
 	
 	var request = require('request');
 	request({
