@@ -24,7 +24,7 @@ var cMensajeFaceBook = function () {
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161212');
+    res.send('botMensajero para Trip ver 1.0.161212a');
 
 });
 
@@ -100,7 +100,7 @@ function wsProcesaMensajeFaceBook (res,oMensajeFaceBook){
 		}else{
 			sRespuesta="Ocurrio error:"+error;
 		}
-		sendTextMessage(sender,sRespuesta);
+		sendTextMessage(sender,sRespuesta.substring(0, 300));
 	});
 }
 
