@@ -10,11 +10,21 @@ app.use(bodyParser.json());
 var token = "EAAJ1IPDkOIEBAKJpSJscO2PhlZBASOR6byTnQA0TEEaXKQHHQnvrf14BMVCZARbgyQBWtemv8LsAjepeCHBVSPJ7B5oNlHtfZBc0QV0TU9wug4y28mXwnSDWZC2kEE51WZC3yZBa5T8f14E3SAhBIwklZAdgfueYVlk6zDmyVgpGgZDZD";
 var verify_token = "Hola";
 
+var cMensajeFaceBook = function () {
+	var id_usuario = "";
+	var nombre_usuario = "";
+	var correo_usuario = "";
+	var mensaje = "";
+	var respuesta = "";
+	var fecha_hora_mensaje = "";
+	var fecha_hora_respuesta = "";
+	}
+
 //Root EndPoint
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161208');
+    res.send('botMensajero para Trip ver 1.0.161212');
 
 });
 
@@ -45,11 +55,17 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
 			var sMensaje=text;
-			/*var n = text.indexOf("Menu");
-				if (n>=0)
-					sendMenuMessage(sender);
-				else*/
-					fRest(sender,'MensajeFaceBook',sMensaje);
+
+			//fRest(sender,'MensajeFaceBook',sMensaje);
+			var oMensajeFaceBook = new cMensajeFaceBook();
+			  oMensajeFaceBook.id_usuario = "Usuario facebook";
+			  oMensajeFaceBook.nombre_usuario = "Nombre";
+			  oMensajeFaceBook.correo_usuario = "Correo";
+			  oMensajeFaceBook.mensaje = sMensaje;
+			  oMensajeFaceBook.respuesta = "";
+			  oMensajeFaceBook.fecha_hora_mensaje = fFechaHora();
+			  oMensajeFaceBook.fecha_hora_respuesta = "";
+			wsProcesaMensajeFaceBook(res,oMensajeFaceBook);
 
 			
         }
@@ -67,6 +83,26 @@ app.listen(port, function () {
     console.log('Facebook Messenger Bot on port: ' + port);
 
 });
+
+function wsProcesaMensajeFaceBook (res,oMensajeFaceBook){
+	
+	var request = require('request');
+	request({
+		url: "http://ryac.no-ip.com/SmartTaxi/rest_smarttaxi.svc/ProcesaMensajeFaceBook",
+		method: "POST",
+		json: true,   // <--Very important!!!
+		body: oMensajeFaceBook
+	}, function (error, response, body){
+		var sRespuesta="";
+		if (!error && response.statusCode == 200) {
+			//var sRespuesta=body.respuesta;
+			sRespuesta=body;
+		}else{
+			sRespuesta="Ocurrio error:"+error;
+		}
+		sendTextMessage(sender,sRespuesta);
+	});
+}
 
 function fRest(sender,Metodo,Parametro){
 	
@@ -111,6 +147,39 @@ function sendTextMessage(sender, text) {
 
     });
 
+}
+
+function fFechaHora () {
+	var hoy = new Date(),
+            d = hoy.getDate(),
+            m = hoy.getMonth() + 1,
+            y = hoy.getFullYear(),
+            data;
+
+        if (d < 10) {
+            d = "0" + d;
+        };
+        if (m < 10) {
+            m = "0" + m;
+        };
+		
+		var H = hoy.getHours();
+		var M = hoy.getMinutes();
+		var S = hoy.getSeconds();
+		
+		if (H < 10) {
+            H = "0" + H;
+        };
+        if (M < 10) {
+            M = "0" + M;
+        };
+		if (S < 10) {
+            S = "0" + S;
+        };
+
+		data = d+"/"+m+"/"+ y +" " + H + ":" + M + ":" + S;
+        
+		return data;
 }
 
 function sendMenuMessage(sender, text) {
