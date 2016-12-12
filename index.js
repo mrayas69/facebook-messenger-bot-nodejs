@@ -24,7 +24,7 @@ var cMensajeFaceBook = function () {
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161212');
+    res.send('botMensajero para Trip ver 1.0.161212a');
 
 });
 
@@ -64,8 +64,9 @@ app.post('/webhook/', function (req, res) {
 			  oMensajeFaceBook.respuesta = "";
 			  oMensajeFaceBook.fecha_hora_mensaje = fFechaHora();
 			  oMensajeFaceBook.fecha_hora_respuesta = "";
-			  
-			fRest(sender,'MensajeFaceBook',sMensaje);
+			
+			sendTextMessage(sender,oMensajeFaceBook);
+			//fRest(sender,'MensajeFaceBook',sMensaje);
 			
 			//wsProcesaMensajeFaceBook(sender,oMensajeFaceBook);
 
