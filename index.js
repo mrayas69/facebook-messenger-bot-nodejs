@@ -98,8 +98,8 @@ function wsProcesaMensajeFaceBook (sender,oMensajeFaceBook){
 	}, function (error, response, body){
 		var sRespuesta="";
 		if (!error && response.statusCode == 200) {
-			//var sRespuesta=body.respuesta;
-			sRespuesta=JSON.stringify(body);
+			sRespuesta=body.respuesta;
+			//sRespuesta=JSON.stringify(body);
 		}else{
 			sRespuesta="Ocurrio error:"+error;
 		}
