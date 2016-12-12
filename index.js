@@ -57,7 +57,7 @@ app.post('/webhook/', function (req, res) {
 			var sMensaje=text;
 
 			var oMensajeFaceBook = new cMensajeFaceBook();
-			  oMensajeFaceBook.id_usuario = "Usuario facebook";
+			  oMensajeFaceBook.id_usuario = sender;
 			  oMensajeFaceBook.nombre_usuario = "Nombre";
 			  oMensajeFaceBook.correo_usuario = "Correo";
 			  oMensajeFaceBook.mensaje = sMensaje;
