@@ -24,7 +24,7 @@ var cMensajeFaceBook = function () {
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161212');
+    res.send('botMensajero para Trip ver 1.0.161212a');
 
 });
 
@@ -65,10 +65,10 @@ app.post('/webhook/', function (req, res) {
 			  oMensajeFaceBook.fecha_hora_mensaje = fFechaHora();
 			  oMensajeFaceBook.fecha_hora_respuesta = "";
 			
-			sendTextMessage(sender,JSON.stringify(oMensajeFaceBook).substring(0, 300));
+			//sendTextMessage(sender,JSON.stringify(oMensajeFaceBook).substring(0, 300));
 			//fRest(sender,'MensajeFaceBook',sMensaje);
 			
-			//wsProcesaMensajeFaceBook(sender,oMensajeFaceBook);
+			wsProcesaMensajeFaceBook(sender,oMensajeFaceBook);
 
 			
         }
@@ -99,7 +99,7 @@ function wsProcesaMensajeFaceBook (sender,oMensajeFaceBook){
 		var sRespuesta="";
 		if (!error && response.statusCode == 200) {
 			//var sRespuesta=body.respuesta;
-			sRespuesta=body;
+			sRespuesta=JSON.stringify(body);
 		}else{
 			sRespuesta="Ocurrio error:"+error;
 		}
