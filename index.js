@@ -11,20 +11,21 @@ var token = "EAAJ1IPDkOIEBAKJpSJscO2PhlZBASOR6byTnQA0TEEaXKQHHQnvrf14BMVCZARbgyQ
 var verify_token = "Hola";
 
 var cMensajeFaceBook = function () {
-	var id_usuario = "";
+	var id_facebook = "";
 	var nombre_usuario = "";
 	var correo_usuario = "";
 	var mensaje = "";
 	var respuesta = "";
 	var fecha_hora_mensaje = "";
 	var fecha_hora_respuesta = "";
+	var id_accion = "--";
 	}
 
 //Root EndPoint
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161212');
+    res.send('botMensajero para Trip ver 1.0.161213');
 
 });
 
@@ -57,7 +58,7 @@ app.post('/webhook/', function (req, res) {
 			var sMensaje=text;
 
 			var oMensajeFaceBook = new cMensajeFaceBook();
-			  oMensajeFaceBook.id_usuario = sender;
+			  oMensajeFaceBook.id_facebook = sender;
 			  oMensajeFaceBook.nombre_usuario = "Nombre";
 			  oMensajeFaceBook.correo_usuario = "Correo";
 			  oMensajeFaceBook.mensaje = sMensaje;
