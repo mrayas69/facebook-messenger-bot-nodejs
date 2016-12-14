@@ -137,6 +137,70 @@ app.post('/webhook/', function (req, res) {
 			var n = text.indexOf("Taxi");
 			if (n>=0){
 				
+				//----
+				var oEstatusServicio = new cEstatusServicio();
+				oEstatusServicio.id_estatus_servicio = "005";
+				oEstatusServicio.estatus_servicio = "Solicitado";
+				oEstatusServicio.activo = true;
+				
+				var oPasajero = new cPasajero();
+				oPasajero.id_facebook="1172264146156638";
+								
+				var oPosicionDe = new cPosicion();
+				oPosicionDe.oEvento = null;
+				oPosicionDe.latitud = 19.6523900000;
+				oPosicionDe.longitud = -99.1024600000;
+				oPosicionDe.altitud = 0;
+				oPosicionDe.velocidad =0;
+				oPosicionDe.direccion = 0;
+				oPosicionDe.dato_lugar = "Direccion de";
+				oPosicionDe.area = "";
+				oPosicionDe.datum = "";
+				oPosicionDe.fecha_hora = fFechaHora();;
+				oPosicionDe.fecha_hora_gmt = "";  
+				oPosicionDe.diferencia_gmt = 0;
+				oPosicionDe.distancia_metros =0;
+				oPosicionDe.creado = "";
+				oPosicionDe.actualizado = "";
+				
+				var oPosicionA = new cPosicion();
+				oPosicionA.oEvento = null;
+				oPosicionA.latitud = 19.4360800000;
+				oPosicionA.longitud = -99.0719100000;
+				oPosicionA.altitud = 0;
+				oPosicionA.velocidad =0;
+				oPosicionA.direccion = 0;
+				oPosicionA.dato_lugar = "Direccion A";
+				oPosicionA.area = "";
+				oPosicionA.datum = "";
+				oPosicionA.fecha_hora = fFechaHora();;
+				oPosicionA.fecha_hora_gmt = "";  
+				oPosicionA.diferencia_gmt = 0;
+				oPosicionA.distancia_metros =0;
+				oPosicionA.creado = "";
+				oPosicionA.actualizado = "";
+				  
+				var oSolicitudServicio = new cSolicitudServicio();
+				oSolicitudServicio.id_solicitud_servicio=0;
+				oSolicitudServicio.precio_servicio = 0;
+				oSolicitudServicio.distancia_servicio = 0;
+				oSolicitudServicio.tiempo_servicio = 0;
+				oSolicitudServicio.creado = fFechaHora();
+				oSolicitudServicio.actualizado = "";
+				oSolicitudServicio.oEstatusServicio = new cEstatusServicio();
+				oSolicitudServicio.oEstatusServicio = oEstatusServicio;
+				oSolicitudServicio.oPasajero = new cPasajero();
+				oSolicitudServicio.oPasajero=oPasajero;
+				oSolicitudServicio.oChofer = null;
+				oSolicitudServicio.oPosicionDe = new cPosicion() ;
+				oSolicitudServicio.oPosicionDe=oPosicionDe;
+				oSolicitudServicio.oPosicionA = new cPosicion();
+				oSolicitudServicio.oPosicionA = oPosicionA;
+				oSolicitudServicio.oPosicionChofer = null;
+				
+				wsProcesaSolicitudServicioFaceBook (sender,oSolicitudServicio);
+				//----
+				
 			}else {
 				var oMensajeFaceBook = new cMensajeFaceBook();
 				  oMensajeFaceBook.id_facebook = sender;
