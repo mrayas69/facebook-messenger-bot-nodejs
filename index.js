@@ -144,7 +144,7 @@ app.post('/webhook/', function (req, res) {
 				oEstatusServicio.activo = true;
 				
 				var oPasajero = new cPasajero();
-				oPasajero.id_facebook="1172264146156638";
+				oPasajero.id_facebook=sender;
 								
 				var oPosicionDe = new cPosicion();
 				oPosicionDe.oEvento = null;
