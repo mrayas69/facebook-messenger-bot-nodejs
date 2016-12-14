@@ -13,19 +13,96 @@ var verify_token = "Hola";
 var cMensajeFaceBook = function () {
 	var id_facebook = "";
 	var nombre_usuario = "";
+	var movil_usuario = "";
 	var correo_usuario = "";
 	var mensaje = "";
 	var respuesta = "";
 	var fecha_hora_mensaje = "";
 	var fecha_hora_respuesta = "";
+	var id_codigo_respuesta_rest = "";
+	var codigo_respuesta_rest = "";
+	var descripcion_rest = "";
 	var id_accion = "--";
+	var accion = "No definida";
 	}
+var cEvento = function () {
+	var id_evento="";
+    var evento="";
+    var id_tipo_notificacion="";
+    var tipo_notificacion="";	
+}
+	
+var cPosicion = function () {
+	var oEvento = new cEvento();
+	var latitud = 0;
+	var longitud = 0;
+	var altitud = 0;
+	var velocidad =0;
+	var direccion = 0;
+	var dato_lugar = "";
+	var area = "";
+	var datum = "";
+	var fecha_hora = "";
+	var fecha_hora_gmt = "";  
+	var diferencia_gmt = 0;
+	var distancia_metros =0;
+	var creado = "";
+	var actualizado = "";
+}
+
+
+	
+var cPasajero = function () {
+  var id_pasajero="";
+  var password="";
+  var id_perfil = "";
+  var perfil="";
+  var saldo = 0;
+  var nombre="";
+  var paterno="";
+  var materno="";
+  var id_sexo="";
+  var correo="";
+  var correo_notificacion="";
+  var movil="";
+  var movil_emergencia="";
+  var id_terminal="";
+  var nombre_terminal="";
+  var id_gcm_pasajero="";
+  var fecha_nacimiento="";
+  var id_facebook = "";
+  var activo = false;
+  var creado="";
+  var actualizado="";
+}
+
+var cEstatusServicio = function () {
+	var id_estatus_servicio = "005";
+    var estatus_servicio = "Solicitado";
+    var activo = true;
+}
+
+var cSolicitudServicio = function () {
+	var id_solicitud_servicio = 0;
+    var precio_servicio = 0;
+    var distancia_servicio = 0;
+    var tiempo_servicio = 0;
+    var creado = fFechaHora();
+    var actualizado = "";
+    var oEstatusServicio = new cEstatusServicio();
+    var oPasajero = new cPasajero();
+    var oChofer = null;
+    var oPosicionDe = new cPosicion() ;
+    var oPosicionA = new cPosicion();
+    var oPosicionChofer = null;
+	
+}
 
 //Root EndPoint
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161213');
+    res.send('botMensajero para Trip ver 1.0.161214');
 
 });
 
@@ -56,20 +133,25 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
 			var sMensaje=text;
-
-			var oMensajeFaceBook = new cMensajeFaceBook();
-			  oMensajeFaceBook.id_facebook = sender;
-			  oMensajeFaceBook.nombre_usuario = "Nombre";
-			  oMensajeFaceBook.correo_usuario = "Correo";
-			  oMensajeFaceBook.mensaje = sMensaje;
-			  oMensajeFaceBook.respuesta = "";
-			  oMensajeFaceBook.fecha_hora_mensaje = fFechaHora();
-			  oMensajeFaceBook.fecha_hora_respuesta = "";
 			
-			//sendTextMessage(sender,JSON.stringify(oMensajeFaceBook).substring(0, 300));
-			//fRest(sender,'MensajeFaceBook',sMensaje);
-			
-			wsProcesaMensajeFaceBook(sender,oMensajeFaceBook);
+			var n = text.indexOf("Taxi");
+			if (n>=0){
+				
+			}else {
+				var oMensajeFaceBook = new cMensajeFaceBook();
+				  oMensajeFaceBook.id_facebook = sender;
+				  oMensajeFaceBook.nombre_usuario = "Nombre";
+				  oMensajeFaceBook.correo_usuario = "Correo";
+				  oMensajeFaceBook.mensaje = sMensaje;
+				  oMensajeFaceBook.respuesta = "";
+				  oMensajeFaceBook.fecha_hora_mensaje = fFechaHora();
+				  oMensajeFaceBook.fecha_hora_respuesta = "";
+				
+				//sendTextMessage(sender,JSON.stringify(oMensajeFaceBook).substring(0, 300));
+				//fRest(sender,'MensajeFaceBook',sMensaje);
+				
+				wsProcesaMensajeFaceBook(sender,oMensajeFaceBook);
+			}
 
 			
         }
@@ -101,6 +183,27 @@ function wsProcesaMensajeFaceBook (sender,oMensajeFaceBook){
 		if (!error && response.statusCode == 200) {
 			sRespuesta=body.respuesta;
 			//sRespuesta=JSON.stringify(body);
+		}else{
+			sRespuesta="Ocurrio error:"+error;
+		}
+		sendTextMessage(sender,sRespuesta);
+	});
+}
+
+function wsProcesaSolicitudServicioFaceBook (sender,oSolicitudServicio){
+	//url: "http://ryac.no-ip.com/SmartTaxi/rest_smarttaxi.svc/ProcesaSolicitudServicioFaceBook",
+	//url: "http://localhost:49192/rest_smarttaxi.svc/ProcesaSolicitudServicioFaceBook",
+	//var myJSONObject = { ... };
+	var request = require('request');
+	request({
+		url: "http://ryac.no-ip.com/SmartTaxi/rest_smarttaxi.svc/ProcesaSolicitudServicioFaceBook",
+		method: "POST",
+		json: true,   // <--Very important!!!
+		body: oSolicitudServicio
+	}, function (error, response, body){
+		var sRespuesta="";
+		if (!error && response.statusCode == 200) {
+			sRespuesta=body.respuesta;
 		}else{
 			sRespuesta="Ocurrio error:"+error;
 		}
