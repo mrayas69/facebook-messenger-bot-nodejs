@@ -102,7 +102,7 @@ var cSolicitudServicio = function () {
 //Modificado MR
 app.get('/', function (req, res) {
 
-    res.send('botMensajero para Trip ver 1.0.161214');
+    res.send('botMensajero para Trip ver 1.0.170110');
 
 });
 
