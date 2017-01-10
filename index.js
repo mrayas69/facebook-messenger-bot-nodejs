@@ -153,7 +153,7 @@ app.post('/webhook/', function (req, res) {
 				oPosicionDe.altitud = 0;
 				oPosicionDe.velocidad =0;
 				oPosicionDe.direccion = 0;
-				oPosicionDe.dato_lugar = "Direccion de";
+				oPosicionDe.dato_lugar = "";
 				oPosicionDe.area = "";
 				oPosicionDe.datum = "";
 				oPosicionDe.fecha_hora = fFechaHora();;
@@ -170,7 +170,7 @@ app.post('/webhook/', function (req, res) {
 				oPosicionA.altitud = 0;
 				oPosicionA.velocidad =0;
 				oPosicionA.direccion = 0;
-				oPosicionA.dato_lugar = "Direccion A";
+				oPosicionA.dato_lugar = "";
 				oPosicionA.area = "";
 				oPosicionA.datum = "";
 				oPosicionA.fecha_hora = fFechaHora();;
